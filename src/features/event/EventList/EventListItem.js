@@ -4,7 +4,7 @@ import EventListAttendee from './EventListAttendee';
 
 class EventListItem extends Component {
   render() {
-    const { event } = this.props;
+    const { event, onEventOpen } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -29,14 +29,21 @@ class EventListItem extends Component {
         <Segment secondary>
           <List horizontal>
             {/* render event.attendee only if there are any */}
-            {event.attendee && event.attendees.map(attendee => (
-              <EventListAttendee key={attendee.id} attendee={attendee}/>
-            ))}
+            {event.attendee &&
+              event.attendees.map(attendee => (
+                <EventListAttendee key={attendee.id} attendee={attendee} />
+              ))}
           </List>
         </Segment>
         <Segment clearing>
           <span>{event.description}</span>
-          <Button as="a" color="teal" floated="right" content="View" />
+          <Button
+            onClick={onEventOpen(event)}
+            as="a"
+            color="teal"
+            floated="right"
+            content="View"
+          />
         </Segment>
       </Segment.Group>
     );
