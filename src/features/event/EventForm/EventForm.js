@@ -40,10 +40,18 @@ export default class EventForm extends Component {
   };
 
   onInputChange = e => {
-    const newEvent = this.state.event;
-    newEvent[e.target.name] = e.target.value;
+    /* This mutate the state */
+    // const newEvent = this.state.event;
+    // newEvent[e.target.name] = e.target.value;
+    // this.setState({
+    //   event: newEvent
+    // });
+    /* This preferable method clone the event */
+    const { name, value } = e.target;
+    const event = { ...this.state.event };
+    event[name] = value;
     this.setState({
-      event: newEvent
+      event
     });
   };
 
